@@ -16,7 +16,7 @@ impl WASMFile {
         buf.read_exact(&mut magic)
             .map_err(|e| ParseError::ReadFailed { source: e })?;
         if magic != [0x00, 0x61, 0x73, 0x6D] {
-            return Err(ParseError::InvalidMagicNumber.into());
+            return Err(ParseError::InvalidMagicNumber);
         }
 
         Ok(Self {})
