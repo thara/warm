@@ -9,6 +9,10 @@ struct TypeSection {
     types: Vec<FuncType>,
 }
 
+struct ImportSection {
+    imports: Vec<Import>,
+}
+
 struct FuncType {
     param: ResultType,
     result: ResultType,
@@ -38,6 +42,47 @@ struct VecType {
 enum RefType {
     FuncRef,
     ExternRef,
+}
+
+struct Import {
+    module: String,
+    name: String,
+    desc: ImportDesc,
+}
+
+struct ImportDesc {
+    desc: ImportDescType,
+}
+
+enum ImportDescType {
+    Func(u32),
+    Table(TableType),
+    Mem(MemType),
+    Global(GlobalType),
+}
+
+struct TableType {
+    elem_type: RefType,
+    limits: Limits,
+}
+
+enum Limits {
+    Min(u32),
+    MinMax(u32, u32),
+}
+
+struct MemType {
+    limits: Limits,
+}
+
+struct GlobalType {
+    val_type: ValueType,
+    mutability: Mutability,
+}
+
+enum Mutability {
+    Const,
+    Var,
 }
 
 enum SectionID {
