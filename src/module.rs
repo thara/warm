@@ -21,6 +21,10 @@ struct TableSection {
     tables: Vec<TableType>,
 }
 
+struct MemorySection {
+    memories: Vec<MemType>,
+}
+
 struct FuncType {
     param: ResultType,
     result: ResultType,
