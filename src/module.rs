@@ -25,6 +25,10 @@ struct MemorySection {
     memories: Vec<MemType>,
 }
 
+struct GlobalSection {
+    globals: Vec<Global>,
+}
+
 struct FuncType {
     param: ResultType,
     result: ResultType,
@@ -95,6 +99,32 @@ struct GlobalType {
 enum Mutability {
     Const,
     Var,
+}
+
+struct Global {
+    global_type: GlobalType,
+    init: Vec<Instr>,
+}
+
+enum Instr {
+    Unreachable,
+    Nop,
+    Block(BlockType),
+    Loop(BlockType),
+    If(BlockType),
+    IfElse(BlockType, BlockType),
+    Br(u32),
+    BrIf(u32),
+    BrTable(Vec<u32>, u32),
+    Return,
+    Call { func: u32 },
+    CallIndirect { type_index: u32 },
+}
+
+enum BlockType {
+    Empty,
+    ValType(ValueType),
+    TypeIndex(u32),
 }
 
 enum SectionID {
