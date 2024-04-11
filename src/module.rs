@@ -13,6 +13,10 @@ struct ImportSection {
     imports: Vec<Import>,
 }
 
+struct FunctionSection {
+    types: Vec<u32>,
+}
+
 struct FuncType {
     param: ResultType,
     result: ResultType,
