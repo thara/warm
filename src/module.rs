@@ -17,6 +17,10 @@ struct FunctionSection {
     types: Vec<u32>,
 }
 
+struct TableSection {
+    tables: Vec<TableType>,
+}
+
 struct FuncType {
     param: ResultType,
     result: ResultType,
