@@ -5,6 +5,16 @@ struct Section {
     contents: Vec<u8>,
 }
 
+type TypeIdx = u32;
+type FuncIdx = u32;
+type TableIdx = u32;
+type MemIdx = u32;
+type GlobalIdx = u32;
+type ElemIdx = u32;
+type DataIdx = u32;
+type LocalIdx = u32;
+type LabelIdx = u32;
+
 struct TypeSection {
     types: Vec<FuncType>,
 }
@@ -14,7 +24,7 @@ struct ImportSection {
 }
 
 struct FunctionSection {
-    types: Vec<u32>,
+    types: Vec<TypeIdx>,
 }
 
 struct TableSection {
@@ -71,7 +81,7 @@ struct ImportDesc {
 }
 
 enum ImportDescType {
-    Func(u32),
+    Func(TypeIdx),
     Table(TableType),
     Mem(MemType),
     Global(GlobalType),
@@ -113,12 +123,12 @@ enum Instr {
     Loop(BlockType),
     If(BlockType),
     IfElse(BlockType, BlockType),
-    Br(u32),
-    BrIf(u32),
-    BrTable(Vec<u32>, u32),
+    Br(LabelIdx),
+    BrIf(LabelIdx),
+    BrTable(Vec<LabelIdx>, LabelIdx),
     Return,
-    Call { func: u32 },
-    CallIndirect { type_index: u32 },
+    Call { func: FuncIdx },
+    CallIndirect { type_index: TypeIdx },
 }
 
 enum BlockType {
