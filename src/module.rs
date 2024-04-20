@@ -39,6 +39,10 @@ struct GlobalSection {
     globals: Vec<Global>,
 }
 
+struct ExportSection {
+    exports: Vec<Export>,
+}
+
 struct FuncType {
     param: ResultType,
     result: ResultType,
@@ -135,6 +139,18 @@ enum BlockType {
     Empty,
     ValType(ValueType),
     TypeIndex(u32),
+}
+
+struct Export {
+    name: String,
+    desc: ExportDesc,
+}
+
+enum ExportDesc {
+    Func(FuncIdx),
+    Table(TableIdx),
+    Mem(MemIdx),
+    Global(GlobalIdx),
 }
 
 enum SectionID {
